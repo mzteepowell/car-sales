@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from './components/Header';
+import AddedFeatures from './components/AddedFeatures';
+import AdditionalFeatures from './components/AdditionalFeatures';
+import { addNewFeature, removeFeature } from './actions'
+import Total from './components/Total';
+import { connect } from 'react-redux';
 
-function App() {
+const App = (state) => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="boxes">
+      <div className="box">
+        <Header car={state.car} />
+        <AddedFeatures car={state.car} />
+      </div>
+      <div className="box">
+        <AdditionalFeatures additionalFeatures={state.additionalFeatures} />
+        <Total car={state.car} additionalPrice={state.additionalPrice} />
+      </div>
     </div>
   );
+};
+
+const map2App = (state) => {
+  return {
+    car: state.car,
+    additionalPrice: state.additionalPrice,
+    additionalFeatures: state.additionalFeatures
+  }
+}
+const map2Dispatch = (dispatch) => {
+  return  (addNewFeature, removeFeature)
 }
 
-export default App;
+export default connect( map2App, map2Dispatch )(App);

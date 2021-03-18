@@ -1,0 +1,1 @@
+export { REMOVE_FEATURE, removeFeature, ADD_NEW_FEATURE, addNewFeature } from './descriptionActions'
